@@ -1045,16 +1045,16 @@
 					this.curFormat = defaultFormat;
 				}
 				else {
-				this.curFormat = formatid;
-				if (!this.curFormat) {
-					if (BattleFormats['gen9randombattle']) {
-						this.curFormat = 'gen9randombattle';
-					} else for (var i in BattleFormats) {
-						if (!BattleFormats[i].searchShow || !BattleFormats[i].challengeShow) continue;
-						this.curFormat = i;
-						break;
+					this.curFormat = formatid;
+					if (!this.curFormat) {
+						if (BattleFormats['gen9randombattle']) {
+							this.curFormat = 'gen9randombattle';
+						} else for (var i in BattleFormats) {
+							if (!BattleFormats[i].searchShow || !BattleFormats[i].challengeShow) continue;
+							this.curFormat = i;
+							break;
+						}
 					}
-				}
 				}
 				formatid = this.curFormat;
 			}
@@ -1447,6 +1447,7 @@
 				});
 			}
 			this.sourceEl.val(format).html(BattleLog.escapeFormat(format) || '(Select a format)');
+			Storage.prefs('defaultformat', format);
 
 			this.close();
 		}
