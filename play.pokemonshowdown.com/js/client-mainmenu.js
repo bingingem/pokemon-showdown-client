@@ -105,6 +105,12 @@
 					}
 				}
 				if (!hasUnread) self.minimizePM($news);
+				
+				var $formatButton = $searchForm.find('button[name=format]');
+				var $teamButton = $searchForm.find('button[name=team]');
+				
+				$formatButton.replaceWith(this.renderFormats());
+				$teamButton.replaceWith(this.renderTeams());
 			});
 
 			if (!app.roomsFirstOpen && window.location.host !== 'demo.psim.us' && window.innerWidth < 630) {
@@ -1040,6 +1046,9 @@
 			if (_.isEmpty(BattleFormats)) {
 				return '<button class="select formatselect" name="format" disabled><em>No formats available</em></button>';
 			}
+			if (!Storage.whenPrefsLoaded.isLoaded) {
+				return '<button class="select formatselect" name="format" disabled value="' + BattleLog.escapeHTML(formatid) + '"><em>Loading...</em></button>';
+			}
 			if (!noChoice) {
 				var defaultFormat = Storage.prefs('defaultformat');
 				if (BattleFormats[defaultFormat]) {
@@ -1067,6 +1076,9 @@
 				return '<button class="select teamselect" name="joinRoom" value="teambuilder"><em class="message-error">Error loading teams</em></button>';
 			}
 			if (!Storage.teams || !window.BattleFormats) {
+				return '<button class="select teamselect" name="team" disabled><em>Loading...</em></button>';
+			}
+			if (!Storage.whenPrefsLoaded.isLoaded) {
 				return '<button class="select teamselect" name="team" disabled><em>Loading...</em></button>';
 			}
 			if (!formatid) formatid = this.curFormat;
