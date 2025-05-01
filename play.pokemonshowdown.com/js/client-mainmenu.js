@@ -106,6 +106,7 @@
 				}
 				if (!hasUnread) self.minimizePM($news);
 				
+				var $searchForm = $('.mainmenu button.big').closest('form');
 				var $formatButton = $searchForm.find('button[name=format]');
 				var $teamButton = $searchForm.find('button[name=team]');
 				
